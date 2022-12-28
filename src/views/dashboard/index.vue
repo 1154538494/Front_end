@@ -1,30 +1,31 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <br>
+    <div class="dashboard-text">地理信息可视化</div>
+    <hr>
+    <div id="map" style="width: 1000px; height: 700px;"></div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
+import * as L from "leaflet";
+import "leaflet/dist/leaflet.css";
 export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
-}
+  filters: {},
+  data() {
+    return {};
+  },
+  mounted() {
+    const url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const map = L.map("map", {
+      center: [51.505, -0.09],
+      zoom: 13,
+    });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+    console.log("map");
+  },
+  methods: {},
+};
 </script>
 
-<style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
-}
-</style>
+
